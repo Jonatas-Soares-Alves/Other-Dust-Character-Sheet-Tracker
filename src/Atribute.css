@@ -1,0 +1,64 @@
+.Atribute{
+    display: inline-block;
+    font-family: 'screaming_neonregular';
+    font-size: 35px;
+    border: 2px solid var(--odorange);
+    border-radius: 5px;
+}
+
+.Atribute div{
+    display: inline-block;
+    padding: 5px;
+}
+
+.Atribute div:first-of-type{
+    border-radius: 5px 0 0 5px;
+    width: 60px;
+    color: var(--odred);
+    border-right: 2px solid var(--odorange);
+}
+
+.Atribute div:last-of-type{
+    border-radius: 0 5px 5px 0px;
+    color: white;
+    background-color: var(--odblack2);
+    border-left: 2px solid var(--odorange);
+}
+
+.Atribute input{
+    display: inline-block;
+    width: 40px;
+    background-color: var(--odblack);
+    font-family: 'screaming_neonregular';
+    font-size: 35px;
+    text-align: center;
+    padding: 5px;
+    border: none;
+    color: var(--odgray);
+}
+
+.Atribute .controlers{
+    vertical-align: bottom;
+    width: 25px;
+    max-height: 43px;
+    text-align: center;
+    padding: 0;
+    overflow: hidden;
+    /*border: 1px solid white;*/
+}
+
+.Atribute .changeBtn{
+    display: block;
+    margin: 0px;
+    padding: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    border-radius: 0;
+    height: 15px;
+    width: 25px;
+}
+
+.Atribute .changeBtn:first-of-type, .Atribute .changeBtn:last-of-type{
+    border-bottom: none;
+    border-top: none;
+}

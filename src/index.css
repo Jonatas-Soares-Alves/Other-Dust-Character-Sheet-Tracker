@@ -1,0 +1,26 @@
+:root{
+  --odred: #ED1C24;
+  --odorange: #FFAE03;
+  --odblack: #181818;
+  --odblack2: #292929;
+  --odgray: #839791;
+}
+
+@font-face {
+  font-family: 'screaming_neonregular';
+  src: url('Fonts/screaming-neon.regular-webfont.woff2') format('woff2'),
+       url('Fonts/screaming-neon.regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  margin: 0;
+  color: white;
+  background-color: #181818;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}

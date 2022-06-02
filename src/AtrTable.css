@@ -1,0 +1,39 @@
+.AtrTable{
+    display: inline-grid;
+    grid-template-areas:
+    'Btn Btn'
+    'Str Int'
+    'Dex Wis'
+    'Con Cha';
+    grid: auto auto auto;
+}
+
+.AtrTable button{
+    margin: 5px auto;
+    display: block;
+    grid-area: Btn;
+    font-family: 'screaming_neonregular';
+    letter-spacing: 1px;
+    color: white;
+    background-color: var(--odblack);
+    border: 1px solid var(--odred);
+    border-radius: 5px;
+}
+
+.AtrTable button:hover{
+    background-color: var(--odred);
+    color: var(--odblack);
+}
+
+.AtrTable button:active{
+    background-color: var(--odorange);
+    color: var(--odblack);
+    border-color: var(--odorange);
+}
+
+.AtrTable #str{ grid-area: Str; }
+.AtrTable #int{ grid-area: Int; }
+.AtrTable #dex{ grid-area: Dex; }
+.AtrTable #wis{ grid-area: Wis; }
+.AtrTable #con{ grid-area: Con; }
+.AtrTable #cha{ grid-area: Cha; }
