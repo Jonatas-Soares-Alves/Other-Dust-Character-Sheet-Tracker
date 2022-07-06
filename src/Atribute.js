@@ -1,97 +1,78 @@
-import './Atribute.css';
-import { useEffect, useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleUp } from '@fortawesome/free-solid-svg-icons';
-import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
-import { faDiceSix } from '@fortawesome/free-solid-svg-icons';
+import './Atribute.css'
+import { useEffect, useState } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faAngleUp } from '@fortawesome/free-solid-svg-icons'
+import { faAngleDown } from '@fortawesome/free-solid-svg-icons'
+import { faDiceSix } from '@fortawesome/free-solid-svg-icons'
 
 
 function Atribute(props) {
-  var [atributeValue,setAtribute] = useState('0');
-  var [modValue,setMod] = useState('+0');
+  var [atributeValue, setAtributeValue] = useState('0')
+  var [modifierValue,setModifier] = useState('+0')
 
-  function setAtr(event = false, value = false){
-    let atr = "0";
-    if(event !== false){
-      setAtribute(atributeValue = event.target.value);
-      atr = event.target.value;
-    }else if(event === false && value !== false){
-      atr = value.toString;
-    }else if(event === false && value === false){
-      atr = props.dice.toString();
+  function setAtributesModifiersDynamicaly(event = false, value = false){
+    const inputAtribute = handleEventType()
+    function handleEventType() {
+      if (event !== false) return event.target.value
+      if (value !== false) return value.toString
+      if (value === false) return props.dice.toString()
+      return "0"
     }
     
-    if(atr.length > 0){
-      let num = parseInt(atr[0]+atr[1]);
-
-      if(num > 99){
-        num = 99;
-      }
-
-      if(num < 0){
-        num = 0;
-      }
-
-      let mod = '';
-
-      if(num <= 3){
-          mod = '-2';
-      }
-
-      if(num >= 4 && num <= 7){
-          mod = '-1';
-      }
-
-      if(num >= 8 && num <= 13){
-          mod = '+0';
-      }
-        
-      if(num >= 14 && num <= 17){
-          mod = '+1';
-      }
-        
-      if(num >= 18){
-          mod = '+2';
-      }
-
-      setAtribute(atributeValue = num);
-      setMod(modValue = mod);
-    }else{
-      setAtribute(atributeValue = '0');
+    const num = inRange(0, 18)
+    function inRange(min, max) {
+      const n = parseInt(inputAtribute[0]+inputAtribute[1])
+      if (n > max) return max
+      if (n < min) return min
+      return n
     }
+
+    const mod = setFinalModifier()
+    function setFinalModifier(){
+      if(num <= 3) return '-2'
+      if(num <= 7) return '-1'
+      if(num <= 13) return '+0'
+      if(num <= 17) return '+1'
+      if(num >= 18) return '+2'
+      return ''
+    }
+
+    setAtributeValue(atributeValue = num)
+    setModifier(modifierValue = mod)
+
   }
 
-  function atrPlus(){
-    setAtr(false, atributeValue+1);
+  function setAtributePlusOne(){
+    setAtributesModifiersDynamicaly(false, atributeValue+1)
   }
 
-  function atrMinus(){
-    setAtr(false, atributeValue-1);
+  function setAtributeMinusOne(){
+    setAtributesModifiersDynamicaly(false, atributeValue-1)
   }
 
-  function atrRandom(){
-    setAtr(false, Math.ceil(Math.random()*6));
+  function setRandomValueForAtribute(){
+    setAtributesModifiersDynamicaly(false, Math.ceil(Math.random()*6))
   }
   
   useEffect(()=>{
     if(typeof props.dice !== 'undefined'){
-      setAtr();
+      setAtributesModifiersDynamicaly()
     }
   })
 
   return (
     <div className="Atribute">
       <div>{props.children}</div>
-        <input className={"AtrName"+props.children} type="text" onChange={setAtr} value={atributeValue ?? ""}></input>
+        <input className={"AtrName"+props.children} type="text" onChange={setAtributesModifiersDynamicaly} value={atributeValue ?? ""}></input>
         <div className='controlers'>
-          <button className='changeBtn BtnPlus' onClick={atrPlus}><FontAwesomeIcon icon={faAngleUp} /></button>
-          <button className='changeBtn BtnRandom' onClick={atrRandom}><FontAwesomeIcon icon={faDiceSix} /></button>
-          <button className='changeBtn BtnMinus' onClick={atrMinus}><FontAwesomeIcon icon={faAngleDown} /></button>
+          <button className='changeBtn BtnPlus' onClick={setAtributePlusOne}><FontAwesomeIcon icon={faAngleUp} /></button>
+          <button className='changeBtn BtnRandom' onClick={setRandomValueForAtribute}><FontAwesomeIcon icon={faDiceSix} /></button>
+          <button className='changeBtn BtnMinus' onClick={setAtributeMinusOne}><FontAwesomeIcon icon={faAngleDown} /></button>
         </div>
-      <div>{modValue}</div>
+      <div>{modifierValue}</div>
     </div>
-  );
+  )
   
 }
 
-export default Atribute;
+export default Atribute
